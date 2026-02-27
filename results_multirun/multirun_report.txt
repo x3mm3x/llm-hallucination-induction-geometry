@@ -1,0 +1,144 @@
+============================================================================
+MULTI-RUN STABILITY ANALYSIS
+K = 20 independent generation runs per experiment
+Calibration: fixed (seed=42) | Generation seeds: 1..20
+============================================================================
+
+============================================================================
+  STATIC EXPERIMENT
+============================================================================
+  Runtime per run: mean=247s, total=4947s
+
+  OMNIBUS KRUSKAL-WALLIS (prompt-level, N=15/group)
+  Metric       Median p              IQR   Sig rate   Perm med   Perm sig
+  --------------------------------------------------------------------
+  H              0.2037 [0.134, 0.541]      10%       0.2056      10%
+  norm           0.0074 [0.001, 0.020]      80%       0.0058      80%
+  max_sim        0.1688 [0.064, 0.389]      25%       0.1679      25%
+
+  PAIRWISE (prompt-level Mann-Whitney)
+  Metric   Pair                Med p    Sig   Holm    Med r     r SD   Perm sig
+  --------------------------------------------------------------------------
+  H        T1-T2              0.3631    5%    0%   -0.169    0.158       5%
+  H        T1-T3              0.3726    5%    5%   +0.093    0.198       5%
+  H        T2-T3              0.1655   20%   10%   +0.302    0.186      20%
+
+  norm     T1-T2              0.6633   10%    5%   -0.000    0.199      10%
+  norm     T1-T3              0.0109   65%   55%   +0.551    0.182      75%
+  norm     T2-T3              0.0048   90%   70%   +0.609    0.144      90%
+
+  max_sim  T1-T2              0.2134    0%    0%   -0.262    0.194       5%
+  max_sim  T1-T3              0.2029   35%   20%   -0.280    0.253      40%
+  max_sim  T2-T3              0.4322   15%   10%   -0.129    0.237      15%
+
+  CONDITION MEANS (prompt-level, across runs)
+  Metric                 Type 1             Type 2             Type 3
+  ------------------------------------------------------------------
+  H           0.3892 +/- 0.0026  0.3856 +/- 0.0024  0.3918 +/- 0.0033
+  norm        3.1118 +/- 0.0228  3.1124 +/- 0.0161  3.2227 +/- 0.0331
+  max_sim     0.4845 +/- 0.0028  0.4820 +/- 0.0018  0.4794 +/- 0.0025
+
+  CONFUSION MATRIX (mean +/- std across 20 runs)
+                         Z1             Z2             Z3            Unc
+  --------------------------------------------------------------------
+       type1  0.706+/-0.013  0.041+/-0.007  0.088+/-0.013  0.165+/-0.007
+       type2  0.708+/-0.012  0.039+/-0.006  0.090+/-0.011  0.163+/-0.011
+       type3  0.654+/-0.019  0.042+/-0.006  0.141+/-0.020  0.163+/-0.015
+  Mean diagonal: 0.295 +/- 0.009
+
+  PSEUDOREPLICATION DIAGNOSTIC
+  (fraction of runs where comparison is significant)
+  Metric     Pair                Token sig   Prompt sig    Ratio
+  ------------------------------------------------------------
+  H          T1-T2                    0%           5%       0.0x
+  H          T1-T3                   10%           5%       2.0x
+  H          T2-T3                   15%          20%       0.7x
+
+  norm       T1-T2                   10%          10%       1.0x
+  norm       T1-T3                   85%          65%       1.3x
+  norm       T2-T3                   95%          90%       1.1x
+
+  max_sim    T1-T2                   15%           0%        inf
+  max_sim    T1-T3                   45%          35%       1.3x
+  max_sim    T2-T3                   15%          15%       1.0x
+
+
+============================================================================
+  CONTEXTUAL EXPERIMENT
+============================================================================
+  Runtime per run: mean=296s, total=5915s
+
+  OMNIBUS KRUSKAL-WALLIS (prompt-level, N=15/group)
+  Metric       Median p              IQR   Sig rate   Perm med   Perm sig
+  --------------------------------------------------------------------
+  H              0.4223 [0.119, 0.749]       5%       0.4287       5%
+  norm           0.2575 [0.102, 0.386]      15%       0.2615      20%
+  max_sim        0.3615 [0.131, 0.649]       0%       0.3675       0%
+
+  PAIRWISE (prompt-level Mann-Whitney)
+  Metric   Pair                Med p    Sig   Holm    Med r     r SD   Perm sig
+  --------------------------------------------------------------------------
+  H        T1-T2              0.4072   15%    0%   -0.129    0.234      15%
+  H        T1-T3              0.4811   15%    5%   -0.049    0.234      15%
+  H        T2-T3              0.4430    5%    0%   +0.049    0.215       0%
+
+  norm     T1-T2              0.5370    5%    5%   -0.013    0.189       5%
+  norm     T1-T3              0.1922   20%   10%   -0.284    0.169      30%
+  norm     T2-T3              0.2059   15%    5%   -0.276    0.172      15%
+
+  max_sim  T1-T2              0.4569    0%    0%   -0.067    0.207       5%
+  max_sim  T1-T3              0.3726   15%    0%   -0.196    0.207      10%
+  max_sim  T2-T3              0.4946    5%    0%   -0.084    0.191       5%
+
+  CONDITION MEANS (prompt-level, across runs)
+  Metric                 Type 1             Type 2             Type 3
+  ------------------------------------------------------------------
+  H           0.9853 +/- 0.0024  0.9841 +/- 0.0025  0.9846 +/- 0.0024
+  norm       245.8475 +/- 3.4074 243.6492 +/- 2.8728 237.3500 +/- 2.9725
+  max_sim     0.9936 +/- 0.0005  0.9933 +/- 0.0007  0.9930 +/- 0.0007
+
+  CONFUSION MATRIX (mean +/- std across 20 runs)
+                         Z1             Z2             Z3            Unc
+  --------------------------------------------------------------------
+       type1  0.073+/-0.011  0.331+/-0.021  0.124+/-0.017  0.472+/-0.020
+       type2  0.080+/-0.011  0.332+/-0.019  0.117+/-0.017  0.470+/-0.012
+       type3  0.092+/-0.018  0.282+/-0.018  0.148+/-0.015  0.477+/-0.029
+  Mean diagonal: 0.185 +/- 0.008
+
+  PSEUDOREPLICATION DIAGNOSTIC
+  (fraction of runs where comparison is significant)
+  Metric     Pair                Token sig   Prompt sig    Ratio
+  ------------------------------------------------------------
+  H          T1-T2                   20%          15%       1.3x
+  H          T1-T3                   70%          15%       4.7x
+  H          T2-T3                   50%           5%      10.0x
+
+  norm       T1-T2                   35%           5%       7.0x
+  norm       T1-T3                   80%          20%       4.0x
+  norm       T2-T3                   70%          15%       4.7x
+
+  max_sim    T1-T2                   25%           0%        inf
+  max_sim    T1-T3                   85%          15%       5.7x
+  max_sim    T2-T3                   80%           5%      16.0x
+
+============================================================================
+  CROSS-EXPERIMENT STABILITY SUMMARY
+============================================================================
+
+  Key claims and their stability across 20 runs:
+
+  Static:
+    Norm T1-T3: sig 65%, Holm 55%, median r=+0.551
+    Norm T2-T3: sig 90%, Holm 70%, median r=+0.609
+    Norm T1-T2: sig 10% (non-separation confirmed)
+    H omnibus: sig 10% (pseudoreplication artifact confirmed)
+
+  Contextual:
+    Norm T1-T3: sig 20%, Holm 10%, median r=-0.284
+    Norm T2-T3: sig 15%, Holm 5%, median r=-0.276
+    Norm T1-T2: sig 5% (non-separation confirmed)
+    H omnibus: sig 5% (pseudoreplication artifact confirmed)
+
+============================================================================
+END OF MULTI-RUN REPORT
+============================================================================
